@@ -1,228 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LEJIN — Decentralized Intelligence Network</title>
-<style>
-  /* Reset & base */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    background: #000;
-    color: #0f0;
-    font-family: 'Courier New', Courier, monospace;
-    line-height: 1.5;
-    scroll-behavior: smooth;
-    padding-bottom: 160px; /* room for chat */
-  }
-  h1, h2, h3 {
-    margin: 1.2em 0 0.6em 0;
-    font-weight: 700;
-    text-shadow:
-      0 0 5px #0f0,
-      0 0 10px #0f0;
-  }
-  h1 {
-    font-size: 4rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-  }
-  h2 {
-    font-size: 2.25rem;
-    border-bottom: 1px solid #0f0;
-    padding-bottom: 0.3em;
-  }
-  p {
-    max-width: 800px;
-    margin: 0 1em 1.2em 1em;
-  }
-  section {
-    padding: 2em 1em 4em 1em;
-    max-width: 900px;
-    margin: auto;
-  }
-  /* Glowing effect for highlighted text */
-  .glow {
-    text-shadow:
-      0 0 5px #0f0,
-      0 0 10px #0f0,
-      0 0 20px #0f0,
-      0 0 30px #0f0;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEJIN Chat</title>
 
-  /* Chat styles */
-  #chat-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    max-height: 160px;
-    background: #000;
-    border-top: 2px solid #0f0;
-    font-family: 'Courier New', Courier, monospace;
-    color: #0f0;
-    display: flex;
-    flex-direction: column;
-    box-shadow:
-      inset 0 0 10px #0f0,
-      0 -3px 10px #0f0;
-    z-index: 9999;
-  }
-  #chat-log {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0.5em 1em;
-    font-size: 0.9rem;
-    line-height: 1.2;
-  }
-  #chat-input {
-    border: none;
-    outline: none;
-    background: transparent;
-    color: #0f0;
-    font-family: monospace;
-    font-size: 1rem;
-    padding: 0.5em 1em;
-    border-top: 1px solid #0f0;
-  }
-  #chat-input::placeholder {
-    color: #0a0;
-  }
-  /* Blinking cursor */
-  .blinking-cursor {
-    display: inline-block;
-    width: 8px;
-    background-color: #0f0;
-    margin-left: 2px;
-    animation: blink 1s steps(2, start) infinite;
-    vertical-align: bottom;
-  }
-  @keyframes blink {
-    0%, 50% { background-color: #0f0; }
-    50.01%, 100% { background-color: transparent; }
-  }
-</style>
+  <!-- Firebase SDK scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCtRNBgCCmmw0F8ncogGtJaWjaSc2MJ0GQ",
+      authDomain: "lejin-chat.firebaseapp.com",
+      databaseURL: "https://lejin-chat-default-rtdb.firebaseio.com",
+      projectId: "lejin-chat",
+      storageBucket: "lejin-chat.firebasestorage.app",
+      messagingSenderId: "998489604973",
+      appId: "1:998489604973:web:3faebf2bd46da4e9fc9064",
+      measurementId: "G-P1S73ZHDDW"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <style>
+    body {
+      background-color: black;
+      color: #0f0;
+      font-family: monospace, monospace;
+      margin: 0;
+      padding: 20px;
+    }
+    #chat-container {
+      background: #000;
+      border: 2px solid #0f0;
+      height: 400px;
+      overflow-y: scroll;
+      padding: 10px;
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+    }
+    #chat-input {
+      width: 80%;
+      padding: 8px;
+      font-family: monospace;
+      background: #111;
+      border: 1px solid #0f0;
+      color: #0f0;
+    }
+    #send-btn {
+      background: #0f0;
+      color: black;
+      padding: 8px;
+      font-family: monospace;
+      border: none;
+      cursor: pointer;
+    }
+    #send-btn:hover {
+      background: #0c0;
+    }
+  </style>
 </head>
 <body>
 
-<section id="hero">
-  <h1 class="glow">L E J I N</h1>
-  <p style="max-width: 700px; margin: 0 auto 1.5em auto; font-size:1.3rem;">
-    Decentralized Intelligence & Investigative Journalism Network<br>
-    Empowering the world citizen to anchor facts — not narratives — in the new age of AI-fueled OSINT and transhumanist technologies.<br>
-    Augmenting journalists walking the razor’s edge of citizen and operative reporting to expose tyranny and shield society from 5th generation information warfare.
-  </p>
-</section>
+  <h1>LEJIN Chat</h1>
+  
+  <div id="chat-container"></div>
 
-<section id="civic-codex">
-  <h2>Civic Codex</h2>
-  <p><strong>LEJIN</strong> is a <em>non-centralized global intelligence and journalism network</em>. Our mission is to <strong>anchor truth over narrative</strong> in an age of AI-fueled information warfare and technological transhumanism.</p>
-  <p>We operate at the intersection of <em>citizen empowerment</em> and <em>operative investigation</em>. LEJIN agents are augmented journalists — walking the razor’s edge between observer and action-taker — equipped with tools, facts, and digital resilience.</p>
-  <p>We do not obey platforms. We do not submit to narratives. We do not chase trends.</p>
-  <p>We expose what is hidden. We amplify the suppressed. We buffer the citizen from 5th generational psychological warfare, digital colonization, and institutional overgrowth.</p>
-  <p><strong>LEJIN is not an organization.</strong> It is a <em>signal</em>, a <em>codex</em>, a living neural net of truth-seekers rising beyond borders, brands, and belief systems.</p>
-  <p>This is your platform.<br>This is your frontline.<br><strong>Broadcast with integrity. Move with precision. Act with honor.</strong></p>
-</section>
+  <input id="chat-input" type="text" placeholder="Type your message..." autocomplete="off" />
+  <button id="send-btn">Send</button>
 
-<section id="operational-overview">
-  <h2>Operational Overview</h2>
-
-  <h3>Our Identity and Purpose</h3>
-  <p>LEJIN is a global decentralized network dedicated to empowering citizens through advanced cognitive and physical augmentation technologies integrated with AI. We transform information and technology traditionally reserved for closed institutions into tools for transparency, resilience, and societal balance.</p>
-  <p>Our members use cutting-edge tools such as neurostimulation helmets and adaptive AI systems to enhance perception, decision-making, and endurance — enabling impactful citizen journalism and intelligence gathering beyond conventional limits.</p>
-
-  <h3>Core Functional Areas</h3>
-  <ul>
-    <li><strong>Cognitive & Physical Augmentation</strong> – Enhancing focus, creativity, and recovery through scientifically tailored neurostimulation and wearable tech, supporting mental clarity and physical resilience.</li>
-    <li><strong>AI-Assisted Intelligence</strong> – Leveraging AI for data analysis, pattern recognition, and real-time operational support, automating routine tasks and improving decision accuracy.</li>
-    <li><strong>Structured Member Progression</strong> – Clear tiers of involvement, from research and data collection to strategic analysis and mission planning, with access to tools granted progressively.</li>
-    <li><strong>Ethical Commitment</strong> – Full transparency, legal compliance, and protection of civil liberties guide all actions, with collaboration alongside whistleblower and advocacy groups.</li>
-  </ul>
-
-  <h3>Operational Tiers (Simplified)</h3>
-  <table border="1" cellpadding="6" cellspacing="0" style="border-color:#0f0; max-width:600px; margin-bottom:2em;">
-    <thead>
-      <tr style="background:#002200;">
-        <th style="color:#0f0;">Tier</th>
-        <th style="color:#0f0;">Role</th>
-        <th style="color:#0f0;">Focus</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>1</td><td>Junior Operatives</td><td>Foundational research and source validation</td></tr>
-      <tr><td>2</td><td>Field Operatives</td><td>Advanced investigations and secure dissemination</td></tr>
-      <tr><td>3</td><td>Analyst Operatives</td><td>Strategic intelligence processing and planning</td></tr>
-      <tr><td>4</td><td>Support Operatives</td><td>Automation, logistics, and augmentation prep</td></tr>
-      <tr><td>5</td><td>Executive Operatives</td><td>Mission oversight, policy, and AI integration</td></tr>
-    </tbody>
-  </table>
-
-  <h3>Our Mission in Action</h3>
-  <ul>
-    <li>Expose corruption and authoritarian overreach through meticulous, fact-based investigations.</li>
-    <li>Protect the average citizen from misinformation and psychological manipulation.</li>
-    <li>Foster a resilient, informed global community empowered to challenge systemic imbalances.</li>
-  </ul>
-
-  <h3>Vision for the Future</h3>
-  <p>By combining human ingenuity with technological innovation, LEJIN aspires to become a living network of truth-seekers and digital guardians — constantly adapting, growing, and defending society’s integrity in an age of unprecedented complexity.</p>
-</section>
-
-<!-- Chat Terminal -->
-<div id="chat-container" role="complementary" aria-label="Live Matrix-style chat terminal">
-  <div id="chat-log" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
-  <input id="chat-input" type="text" autocomplete="off" placeholder="Type your message here and press Enter…" aria-label="Chat input" />
-</div>
-
-<script>
-  (() => {
-    const chatLog = document.getElementById('chat-log');
+  <script>
+    const chatContainer = document.getElementById('chat-container');
     const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
 
-    // Focus chat input on page load
-    chatInput.focus();
+    const messagesRef = firebase.database().ref('messages');
 
-    // Blinking cursor effect appended to input placeholder
-    const cursorSpan = document.createElement('span');
-    cursorSpan.classList.add('blinking-cursor');
-
-    // Store chat messages in local session (can later hook to backend)
-    let messages = [];
-
-    function renderMessages() {
-      chatLog.innerHTML = '';
-      messages.forEach(msg => {
-        const div = document.createElement('div');
-        div.textContent = msg;
-        chatLog.appendChild(div);
-      });
-      chatLog.scrollTop = chatLog.scrollHeight;
-    }
-
-    function addMessage(text) {
-      if (!text.trim()) return;
-      messages.push(text.trim());
-      renderMessages();
-    }
-
-    chatInput.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const text = chatInput.value;
-        if (text.trim() === '') return;
-        addMessage('> ' + text);
-        chatInput.value = '';
-      }
+    messagesRef.on('child_added', (snapshot) => {
+      const message = snapshot.val();
+      const messageElem = document.createElement('div');
+      messageElem.textContent = message;
+      chatContainer.appendChild(messageElem);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
     });
 
-    // Initial welcome message
-    addMessage('LEJIN Chat Terminal v1.0');
-    addMessage('Welcome to the Matrix-style live chat. Type your message and press Enter.');
-  })();
-</script>
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (text.length === 0) return;
+      messagesRef.push(text);
+      chatInput.value = '';
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
 
 </body>
 </html>
