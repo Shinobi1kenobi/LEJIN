@@ -66,7 +66,7 @@
         <li>Concrete aprons w/ 45° slope</li>
         <li>Non-ferrous alloy vent covers</li>
       </ul>
-      <p><strong>Source:</strong> NATO Underground Hardened Site Design Manual (2007, declassified 2016)</p>
+      <p><span style="color:red"><strong>Source:</strong> NATO Underground Hardened Site Design Manual (2007, declassified 2016)</span></p>
 
       <p><strong>B. Road Networks (ATP-3.34.39)</strong></p>
       <ul>
@@ -74,6 +74,7 @@
         <li>12m turn radius confirmed by switchbacks</li>
         <li>Geotextile stabilization (LIDAR-confirmed)</li>
       </ul>
+      <p><span style="color:red"><strong>Source:</strong> NATO ATP-3.34.39 Engineering Field Doctrine</span></p>
 
       <p><strong>C. Thermal Masking (AC/322-SC/5)</strong></p>
       <ul>
@@ -81,6 +82,7 @@
         <li>Lithium bromide coolant traces (XRF-confirmed)</li>
         <li>No wildlife near vents (acoustic dampening)</li>
       </ul>
+      <p><span style="color:red"><strong>Source:</strong> NATO Subterranean Thermal Signature Mitigation Guidelines</span></p>
 
       <h4>III. Phase-III NATO Interoperability</h4>
       <ul>
@@ -88,6 +90,7 @@
         <li><strong>Logistics:</strong> Pacheco Pass Tunnel = STANAG 7141 spec (7m+ bore)</li>
         <li><strong>Energy:</strong> Aqueduct cooling follows EMCON and STANAG 1008</li>
       </ul>
+      <p><span style="color:red"><strong>Source:</strong> NATO ACO Phase-III Interoperability Manual</span></p>
 
       <h4>IV. Evidence Hierarchy</h4>
       <ul>
@@ -118,12 +121,11 @@
 
       <h4>Appendices</h4>
       <ul>
-        <li>STANAG 4569 Excerpts</li>
-        <li>Sentinel-2 Thermal Analysis</li>
-        <li>USACE NATO Contracts</li>
+        <li><span style="color:red">STANAG 4569 Excerpts</span></li>
+        <li><span style="color:red">Sentinel-2 Thermal Analysis</span></li>
+        <li><span style="color:red">USACE NATO Contracts</span></li>
       </ul>
       <p><strong>⚠️ DISCLAIMER:</strong> All data sourced from declassified NATO manuals and public geospatial surveys.</p>
-      <p><strong>Source Links:</strong> [Sentinel-2 thermal] | [ATP-3.34.39] | [USGS lidar]</p>
     </section>
   </main>
 
@@ -144,7 +146,6 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Nickname arrays (double categories with fun meme names)
     const operationalNames = [
       "Rogue Pup", "Shadow Viper", "Obsidian Wraith", "Silent Hawk", "Crimson Ghost",
       "Iron Fang", "Steel Raven", "Phantom Lynx", "Echo Wolf", "Nova Reaper"
@@ -155,10 +156,8 @@
       "MoonMoon", "TrollFace", "GrumpyCat", "LOLBot", "EpicFail"
     ];
 
-    // Combine both arrays into one big nickname pool
     const allNicknames = operationalNames.concat(memeNames);
 
-    // Assign a random nickname per user (stored in localStorage so it stays on refresh)
     function getNickname() {
       let name = localStorage.getItem('lejin_nickname');
       if (!name) {
@@ -169,24 +168,19 @@
     }
     const nickname = getNickname();
 
-    // Elements
     const chatWindow = document.getElementById('chat-window');
     const chatInput = document.getElementById('chat-input');
     const sendBtn = document.getElementById('send-btn');
 
-    // Listen for new messages
     db.ref('messages').on('child_added', snapshot => {
       const data = snapshot.val();
       const msgDiv = document.createElement('div');
       msgDiv.className = 'chat-message';
-
-      // Show nickname + message with colored styling
       msgDiv.innerHTML = `<span class="chat-nickname">${data.nick}:</span> ${data.text}`;
       chatWindow.appendChild(msgDiv);
       chatWindow.scrollTop = chatWindow.scrollHeight;
     });
 
-    // Send message function
     function sendMessage() {
       const text = chatInput.value.trim();
       if(text) {
