@@ -51,46 +51,76 @@
     const firebaseConfig = {
       apiKey: "AIzaSyCtRNBgCCmmw0F8ncogGtJaWjaSc2MJ0GQ",
       authDomain: "lejin-chat.firebaseapp.com",
-      databaseURL: "https://lejin-chat-default-rtdb.firebaseio.com",
-      projectId: "lejin-chat",
-      storageBucket: "lejin-chat.appspot.com",
-      messagingSenderId: "998489604973",
-      appId: "1:998489604973:web:3faebf2bd46da4e9fc9064",
-      measurementId: "G-P1S73ZHDDW"
-    };
+// Initialize Firebase (keep your existing config here)
+const firebaseConfig = {
+  apiKey: "AIzaSyCtRNBgCCmmw0F8ncogGtJaWjaSc2MJ0GQ",
+  authDomain: "lejin-chat.firebaseapp.com",
+  databaseURL: "https://lejin-chat-default-rtdb.firebaseio.com",
+  projectId: "lejin-chat",
+  storageBucket: "lejin-chat.appspot.com",
+  messagingSenderId: "998489604973",
+  appId: "1:998489604973:web:3faebf2bd46da4e9fc9064",
+  measurementId: "G-P1S73ZHDDW"
+};
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-    const chatWindow = document.getElementById('chat-window');
-    const chatInput = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-btn');
+const chatWindow = document.getElementById('chat-window');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
 
-    // Listen for new messages
-    db.ref('messages').on('child_added', snapshot => {
-      const msg = snapshot.val();
-      const msgDiv = document.createElement('div');
-      msgDiv.className = 'chat-message';
-      msgDiv.textContent = msg;
-      chatWindow.appendChild(msgDiv);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    });
+const operationalNicknames = [
+  "Shadow Viper","Neon Ninja","Obsidian Wraith","Ghost Reaper","Silent Hawk","Cyber Specter",
+  "Quantum Fox","Rogue Pup","Iron Sentinel","Digital Ronin","Steel Phantom","Night Falcon",
+  "Blaze Striker","Chrome Vortex","Thunder Raven","Shadow Lynx","Crimson Specter","Phantom Stalker",
+  "Iron Wolf","Cyber Valkyrie"
+];
 
-    // Send message
-    sendBtn.onclick = () => {
-      const msg = chatInput.value.trim();
-      if(msg){
-        db.ref('messages').push(msg);
-        chatInput.value = '';
-      }
-    };
+const memeNicknames = [
+  "EpicBreadGuy","DogeMaster","QuantumToaster","SassyPixel","404NotFound","CheeseburgerNinja",
+  "BananaOverlord","SpamLord3000","PixelatedPotato","CaptainClumsy","DankMemer","KeyboardWarrior",
+  "InvisibleToast","SaltyPickle","MemeMagnet","TacoBandito","NoodleNinja","WaffleWizard","CactusKid","FunkyMonkey"
+];
 
-    chatInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        sendBtn.click();
-      }
-    });
+const allNicknames = operationalNicknames.concat(memeNicknames);
+
+// Assign or retrieve nickname for this user/session
+let myNickname = sessionStorage.getItem('nickname');
+if(!myNickname){
+  // Pick a random nickname and store it for the session
+  myNickname = allNicknames[Math.floor(Math.random() * allNicknames.length)];
+  sessionStorage.setItem('nickname', myNickname);
+}
+
+// Function to add a message to the chat window with nickname
+function addMessage(name, text){
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'chat-message';
+  msgDiv.innerHTML = `<strong>${name}:</strong> ${text}`;
+  chatWindow.appendChild(msgDiv);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+// Listen for new messages
+db.ref('messages').on('child_added', snapshot => {
+  const { name, text } = snapshot.val();
+  addMessage(name, text);
+});
+
+// Send message handler
+sendBtn.onclick = () => {
+  const text = chatInput.value.trim();
+  if(text){
+    db.ref('messages').push({ name: myNickname, text });
+    chatInput.value = '';
+  }
+};
+
+// Send message on Enter key
+chatInput.addEventListener('keypress', e => {
+  if(e.key === 'Enter') sendBtn.click();
+});
   </script>
 </body>
 </html>
