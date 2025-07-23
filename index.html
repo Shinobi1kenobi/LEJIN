@@ -7,10 +7,9 @@
   <link rel="stylesheet" href="style.css" />
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-
- <script src="Alexander Gilbert Baraona  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
+
 <body>
   <header>
     <h1 class="title">LEJIN</h1>
@@ -52,7 +51,6 @@
       <h3>NATO-Compliant Phase-III Infrastructure in Diablo Range</h3>
       <p><strong>"Behind the façade of microwave towers and aqueducts, the Diablo Range conceals a labyrinth of tunnels, vents, and roads matching Pentagon specifications for a subterranean command network—and the government’s redactions all but admit it."</strong></p>
       
-
       <h4>I. Executive Summary</h4>
       <p>This report identifies 14 NATO-standard engineering practices in the Diablo Range’s subterranean infrastructure, confirming its classification as a Phase-III deep-earth military complex under Allied Command Operations (ACO) guidelines.</p>
       <ul>
@@ -133,7 +131,7 @@
 
     <section class="acknowledgment">
       <h4>Special Thanks</h4>
-      <p><strong>We acknowledge Alexander Gilbert Baroana</strong> as the initial journalistic source that led to LEJIN's awareness of the Mount Oso complex. His observation of key structural anomalies inspired this deeper investigation.</p>
+      <p><strong>We acknowledge Alexander Gilbert Baraona</strong> as the initial journalistic source that led to LEJIN's awareness of the Mount Oso complex. His observation of key structural anomalies inspired this deeper investigation.</p>
     </section>
   </main>
 
@@ -174,7 +172,6 @@
       }
       return name;
     }
-    const nickname = getNickname();
 
     const nickname = getNickname();
     const chatWindow = document.getElementById('chat-window');
@@ -192,7 +189,6 @@
 
     function sendMessage() {
       const text = chatInput.value.trim();
-      if(text) {
       if (text) {
         db.ref('messages').push({
           nick: nickname,
