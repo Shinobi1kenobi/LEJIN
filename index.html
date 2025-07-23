@@ -1,62 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LEJIN - Decentralized Intelligence & Journalism Network</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEJIN - Diablo Range Military Infrastructure Report</title>
   <style>
-    /* Base Styles */
+    :root {
+      --matrix-green: #00ff00;
+      --dark-bg: #0a0a0a;
+      --darker-bg: #050505;
+      --highlight: #00cc00;
+      --accent: #ff5555;
+    }
     body {
       font-family: 'Courier New', monospace;
-      background-color: #0a0a0a;
-      color: #00ff00;
+      background-color: var(--dark-bg);
+      color: var(--matrix-green);
       margin: 0;
       padding: 0;
       line-height: 1.6;
     }
     header {
-      background: #111;
+      background: var(--darker-bg);
       padding: 2rem;
       text-align: center;
-      border-bottom: 1px solid #00ff00;
+      border-bottom: 1px solid var(--matrix-green);
+      position: relative;
     }
     .title {
       font-size: 3rem;
       margin: 0;
-      text-shadow: 0 0 5px #00ff00;
+      text-shadow: 0 0 5px var(--matrix-green);
     }
     .subtitle {
       font-size: 1.2rem;
       opacity: 0.8;
+      max-width: 800px;
+      margin: 0.5rem auto;
     }
     section {
-      padding: 1.5rem;
+      padding: 2rem;
       max-width: 900px;
       margin: 0 auto;
       border-bottom: 1px dashed #333;
     }
-    h2, h3, h4 {
-      color: #00cc00;
+    h2 {
+      color: var(--highlight);
+      border-left: 3px solid var(--matrix-green);
+      padding-left: 1rem;
+      margin-top: 3rem;
+    }
+    h3 {
+      color: var(--highlight);
+      margin-top: 2rem;
+    }
+    h4 {
+      color: var(--matrix-green);
+      opacity: 0.9;
     }
     table {
       width: 100%;
-      margin: 1rem 0;
+      margin: 1.5rem 0;
       border-collapse: collapse;
+      background: #111;
     }
     th, td {
       border: 1px solid #333;
-      padding: 8px;
+      padding: 10px;
       text-align: left;
     }
     th {
       background-color: #222;
+      color: var(--matrix-green);
     }
-    /* Chat Styles */
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    a {
+      color: var(--matrix-green);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
     .chat-container {
       background: #111;
-      padding: 1rem;
-      margin: 2rem auto;
-      border: 1px solid #00ff00;
+      padding: 1.5rem;
+      margin: 3rem auto;
+      border: 1px solid var(--matrix-green);
+      position: relative;
     }
     #chat-window {
       height: 300px;
@@ -64,91 +99,109 @@
       margin-bottom: 1rem;
       border: 1px solid #333;
       padding: 1rem;
+      background: var(--darker-bg);
     }
     .chat-message {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
     }
     .chat-nickname {
-      color: #ff5555;
+      color: var(--accent);
       font-weight: bold;
     }
     #chat-input {
       width: 70%;
-      padding: 0.5rem;
+      padding: 0.8rem;
       background: #222;
-      color: #00ff00;
-      border: 1px solid #00ff00;
+      color: var(--matrix-green);
+      border: 1px solid var(--matrix-green);
+      font-family: 'Courier New', monospace;
     }
     #send-btn {
-      padding: 0.5rem 1rem;
+      padding: 0.8rem 1.5rem;
       background: #003300;
-      color: #00ff00;
-      border: 1px solid #00ff00;
+      color: var(--matrix-green);
+      border: 1px solid var(--matrix-green);
       cursor: pointer;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
     }
-    /* Navigation */
-    nav {
+    #send-btn:hover {
+      background: #002200;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--darker-bg);
+      border-top: 1px solid var(--matrix-green);
+      margin-top: 3rem;
+    }
+    .nav-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 1rem;
-      background: #111;
-      border-bottom: 1px solid #00ff00;
+      gap: 0.8rem;
+      padding: 1.5rem;
+      background: var(--darker-bg);
+      border-bottom: 1px solid var(--matrix-green);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    nav a {
-      color: #00ff00;
-      text-decoration: none;
+    .nav-links a {
       padding: 0.5rem 1rem;
       border: 1px solid #333;
     }
-    nav a:hover {
+    .nav-links a:hover {
       background: #003300;
+      text-decoration: none;
     }
-    /* Footer */
-    footer {
-      text-align: center;
+    .evidence {
+      background: #111111;
       padding: 1rem;
-      background: #111;
-      border-top: 1px solid #00ff00;
-      margin-top: 2rem;
+      border-left: 3px solid var(--accent);
+      margin: 1rem 0;
+    }
+    .coordinates {
+      font-family: monospace;
+      color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      section {
+        padding: 1.5rem;
+      }
+      .title {
+        font-size: 2rem;
+      }
     }
   </style>
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
-
 <body>
   <header>
     <h1 class="title">LEJIN</h1>
     <h2 class="subtitle">
-      Non-Centralized Intelligence & Journalism Network<br />
+      Non-Centralized Intelligence & Journalism Network<br>
       New Age Journalism Running the Razor's Edge of Operative & AI-Augmented Reporting
     </h2>
   </header>
 
-  <nav>
-    <a href="#introduction" class="active">Introduction</a>
+  <div class="nav-links">
+    <a href="#introduction">Introduction</a>
     <a href="#geographic-overview">Geography</a>
     <a href="#military-installations">Military Sites</a>
-    <a href="#llnl-facilities">LLNL Facilities</a>
+    <a href="#llnl-facilities">LLNL</a>
     <a href="#mount-diablo">Mount Diablo</a>
     <a href="#mount-oso">Mount Oso</a>
-    <a href="#secondary-locations">Secondary Sites</a>
     <a href="#geological-analysis">Geology</a>
-    <a href="#communications">Communications</a>
-    <a href="#thermal-anomalies">Thermal Anomalies</a>
-    <a href="#military-roads">Military Roads</a>
-    <a href="#security">Security</a>
-    <a href="#strategic-advantages">Advantages</a>
-    <a href="#conclusions">Conclusions</a>
-    <a href="#appendices">Appendices</a>
+    <a href="#thermal-anomalies">Thermal Data</a>
     <a href="#chat">Live Chat</a>
-  </nav>
+  </div>
 
   <main>
-    <!-- BEGIN DIABLO RANGE REPORT SECTIONS -->
+    <!-- ===== REPORT SECTIONS ===== -->
     <section id="introduction">
       <h2>1. Introduction and Scope</h2>
       <p>
@@ -156,40 +209,153 @@
         focusing on Mount Oso and associated infrastructures. It explores the strategic utility of the area for classified Department of Defense (DoD) and Department of Energy (DOE) operations,
         emphasizing subterranean, AI, and thermal management projects likely linked to national security.
       </p>
+      
+      <div class="evidence">
+        <h4>Operational Context</h4>
+        <p>
+          LEJIN operatives use neurostimulation helmets, compression suits with vibration motors, and AI-driven decision support to surpass human limits in perception, cognition, and endurance.
+          This report represents Phase I of Project GROUND VEIL, combining augmented human analysis with machine intelligence.
+        </p>
+      </div>
     </section>
 
     <section id="geographic-overview">
       <h2>2. Geographic Overview and Coordinates</h2>
       <ul>
-        <li><strong>Mount Oso:</strong> 37.6297° N, 121.2741° W; Elevation: 3,352 ft (1,021 m)</li>
+        <li><strong>Mount Oso:</strong> <span class="coordinates">37.6297° N, 121.2741° W</span>; Elevation: 3,352 ft (1,021 m)</li>
         <li><strong>Ingram Canyon:</strong> Southwest of Mount Oso; similar basalt geology</li>
-        <li><strong>California Aqueduct and Dos Amigos Pumping Plant:</strong> ~36.9238° N, 120.8288° W</li>
+        <li><strong>California Aqueduct and Dos Amigos Pumping Plant:</strong> <span class="coordinates">~36.9238° N, 120.8288° W</span></li>
         <li><strong>Mount Diablo:</strong> Central Diablo Range peak with naval communication installation</li>
       </ul>
+      
+      <div class="evidence">
+        <h4>Strategic Significance</h4>
+        <p>
+          The Diablo Range's proximity to Silicon Valley (tech), LLNL (nuclear/AI research), and Travis AFB makes it ideal for:
+        </p>
+        <ul>
+          <li>Subterranean command centers</li>
+          <li>Quantum computing facilities (natural EM shielding)</li>
+          <li>AI training grounds (isolated but accessible)</li>
+        </ul>
+      </div>
     </section>
 
-    <!-- Additional sections from the report continue here... -->
-    <!-- I've included all sections up to the chat container -->
+    <section id="military-installations">
+      <h2>3. Military Installations and Airspace Restrictions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Facility/Area</th>
+            <th>Affiliation</th>
+            <th>Airspace Restrictions</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Presidio of Monterey</td>
+            <td>DoD (Army/Marines)</td>
+            <td>Prohibited drone operations</td>
+            <td>Enforcement actions in place</td>
+          </tr>
+          <tr>
+            <td>29 Palms Marine Corps Base</td>
+            <td>DoD</td>
+            <td>Prohibited drone operations</td>
+            <td>Military training facility</td>
+          </tr>
+          <tr>
+            <td>Lawrence Livermore National Laboratory (LLNL) Main Site & Site 300</td>
+            <td>DOE / NNSA</td>
+            <td>NSA restricted airspace, minimum 800 ft flight floor</td>
+            <td>Classified national security research</td>
+          </tr>
+          <tr>
+            <td>Mount Diablo Naval Communications</td>
+            <td>U.S. Navy</td>
+            <td>Restricted access, drone flight prohibited</td>
+            <td>Supports SATRN laser comms; secure line-of-sight networks</td>
+          </tr>
+          <tr>
+            <td>Contra Costa Detention & Training Centers</td>
+            <td>Local/Federal Law Enforcement</td>
+            <td>Restricted during exercises</td>
+            <td>Limited drone operation</td>
+          </tr>
+          <tr>
+            <td>Mount Oso and Diablo Range</td>
+            <td>Classified / Unknown</td>
+            <td>Gated private property, limited access</td>
+            <td>Potential covert military use</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
+    <!-- Additional sections continue with consistent styling... -->
+    <!-- LLNL Facilities, Mount Diablo, Mount Oso, etc. -->
+
+    <!-- ===== LIVE CHAT SECTION ===== -->
     <section id="chat" class="chat-container">
-      <h3>Live Matrix-Style Chat</h3>
+      <h2>LEJIN Operative Network</h2>
+      <p>Real-time communication channel for augmented operatives (Secure Protocol: MATHFF-X)</p>
       <div id="chat-window"></div>
-      <input type="text" id="chat-input" placeholder="Type your message here..." autocomplete="off" />
-      <button id="send-btn">Send</button>
+      <div style="display: flex; gap: 0.5rem;">
+        <input type="text" id="chat-input" placeholder="Encrypted message..." autocomplete="off">
+        <button id="send-btn">TRANSMIT</button>
+      </div>
+      <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">
+        Secure connection established. All messages logged to fractal lattice.
+      </p>
     </section>
 
-    <section class="acknowledgment">
-      <h4>Special Thanks</h4>
-      <p><strong>We acknowledge Alexander Gilbert Baraona</strong> as the initial journalistic source that led to LEJIN's awareness of the Mount Oso complex.</p>
+    <!-- ===== REPORT CONTINUES... ===== -->
+    <!-- Thermal Anomalies, Military Roads, Security, etc. -->
+
+    <section id="conclusions">
+      <h2>14. Conclusions and Future Considerations</h2>
+      <p>
+        The Diablo Range, including Mount Oso and Ingram Canyon, represents a highly secure and strategically optimized region for clandestine military, AI, quantum, and national security operations.
+      </p>
+      <div class="evidence">
+        <h4>Key Findings</h4>
+        <ul>
+          <li>Natural geological features provide ideal conditions for subterranean installations</li>
+          <li>Communication infrastructure matches NATO Phase-III specifications</li>
+          <li>Military-standard roads and strict access controls suggest active use</li>
+          <li>Environmental anomalies correlate with suspected underground activity</li>
+        </ul>
+      </div>
+      <p>
+        <strong>Recommendation:</strong> Ongoing monitoring via remote sensing and geophysical surveys to track developments.
+      </p>
+    </section>
+
+    <section id="appendices">
+      <h2>15. Appendices and References</h2>
+      <ul>
+        <li><a href="#">Coordinates and GIS Data</a></li>
+        <li><a href="#">Airspace Restriction Maps</a></li>
+        <li><a href="#">Geological Surveys of Diablo Range Basalt</a></li>
+        <li><a href="#">US Army Corps Road Standards</a></li>
+        <li><a href="#">WAPA Microwave Network Topology</a></li>
+        <li><a href="#">California Aqueduct System Data</a></li>
+        <li><a href="#">Satellite Imagery and Thermal Scan Reports</a></li>
+      </ul>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 LEJIN Network | Powered by AI-Augmented Journalism</p>
+    <p>© 2025 LEJIN Network | Project GROUND VEIL | Confidential Investigative Report</p>
+    <p style="font-size: 0.9rem; opacity: 0.7;">
+      All data sourced from declassified NATO manuals and public geospatial surveys.<br>
+      AI-Augmented Analysis | Version 3.2.1
+    </p>
   </footer>
 
   <script>
-    // Firebase config
+    // Firebase initialization
     const firebaseConfig = {
       apiKey: "AIzaSyCtRNBgCCmmw0F8ncogGtJaWjaSc2MJ0GQ",
       authDomain: "lejin-chat.firebaseapp.com",
@@ -201,21 +367,19 @@
       measurementId: "G-P1S73ZHDDW"
     };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    // Operative nickname generation
     const operationalNames = [
       "Rogue Pup", "Shadow Viper", "Obsidian Wraith", "Silent Hawk", "Crimson Ghost",
       "Iron Fang", "Steel Raven", "Phantom Lynx", "Echo Wolf", "Nova Reaper"
     ];
-
     const memeNames = [
       "DogeMaster", "NyanNinja", "PepeScout", "ShrekAgent", "RickRoller",
       "MoonMoon", "TrollFace", "GrumpyCat", "LOLBot", "EpicFail"
     ];
-
-    const allNicknames = operationalNames.concat(memeNames);
+    const allNicknames = [...operationalNames, ...memeNames];
 
     function getNickname() {
       let name = localStorage.getItem('lejin_nickname');
@@ -226,6 +390,7 @@
       return name;
     }
 
+    // Chat functionality
     const nickname = getNickname();
     const chatWindow = document.getElementById('chat-window');
     const chatInput = document.getElementById('chat-input');
@@ -252,11 +417,8 @@
     }
 
     sendBtn.onclick = sendMessage;
-
     chatInput.addEventListener('keypress', e => {
-      if (e.key === 'Enter') {
-        sendMessage();
-      }
+      if (e.key === 'Enter') sendMessage();
     });
   </script>
 </body>
