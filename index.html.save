@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LEJIN — Decentralized Intelligence Network</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-color: black;
+      color: #0f0;
+    }
+    header {
+      background-color: #111;
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid #0f0;
+    }
+    section {
+      padding: 2rem;
+      border-bottom: 1px solid #0f0;
+    }
+    h1, h2 {
+      color: #0f0;
+    }
+    a {
+      color: #0f0;
+      text-decoration: underline;
+    }
+    .sources {
+      background-color: #111;
+      color: #f00;
+    }
+    .sources h2, .sources a {
+      color: #f44;
+    }
+    .sources img {
+      max-width: 100%;
+      margin-top: 1rem;
+      border: 2px solid #f00;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #111;
+      color: #0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>LEJIN — Decentralized Intelligence & Investigative Journalism Network</h1>
+    <p>Tracking hidden warfare, psychological operations, environmental concealment, and more.</p>
+  </header>
+
+  <section>
+    <h2>🛰️ Diablo Range NATO Infrastructure Report</h2>
+    <p>
+      Newly surfaced data highlights underground NATO installations across the Diablo Range.
+      Disguised as geological formations or resource stations, these structures use 
+      advanced masking techniques like urban mimicry, thermal obfuscation, and EM quiet zones.
+    </p>
+    <p>
+      Initial discoveries were cross-validated using Sentinel-2 satellite imagery and archived DWR geological surveys.
+      Analysts believe this structure plays a key role in asymmetric logistical operations and communication tests.
+    </p>
+  </section>
+
+  <section>
+    <h2>🧠 Operational Overview</h2>
+    <ul>
+      <li>Fusion of open-source intelligence with field-disclosed maps and pattern analysis</li>
+      <li>Autonomous mapping via drone swarms & edge ML devices</li>
+      <li>Local contributors document anomalies, heat traces, or blocked public access areas</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>💬 Matrix-Style Chat (Coming Soon)</h2>
+    <p>Real-time data analysis, redacted military documents, and whistleblower drops — encrypted and anonymous.</p>
+  </section>
+
+  <!-- 🔻 SOURCE SECTION START -->
+  <section class="sources">
+    <h2>🧷 Sources & Original Material</h2>
+    <ul style="line-height: 1.6;">
+      <li><strong>Original Story:</strong> <a href="https://your-original-source-link.com">Diablo Range NATO Infrastructure Report</a></li>
+      <li><strong>Satellite Data:</strong> <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-2">Sentinel-2 Thermal Bands</a></li>
+      <li><strong>Engineering Specs:</strong> <a href="https://nato.int/">NATO STANAG Documentation</a></li>
+      <li><strong>FOIA Disclosures:</strong> Public requests filed with DWR, BLM, EPA (2022–2024)</li>
+      <li><strong>Geospatial References:</strong> <a href="https://earthexplorer.usgs.gov/">USGS LIDAR & Earth Explorer</a></li>
+    </ul>
+    <p><strong>Primary Source: Alexander Gilbert Baraona</strong></p>
+    <img src="alexander-source.jpg" alt="Alexander Gilbert Baraona - Source" />
+  </section>
+  <!-- 🔺 SOURCE SECTION END -->
+
+  <footer>
+    © 2025 LEJIN — Decentralized Intel Syndicate
+  </footer>
+
+</body>
+</html>
