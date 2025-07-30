@@ -164,9 +164,9 @@ main {
   }
 }
 .small-img {
-  width: 44px !important;
+  width: 60px !important;
   height: auto !important;
-  border-radius: 12
+  border-radius: 20
 px;
   margin-right: 1rem;
   float: left;
