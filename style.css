@@ -164,8 +164,7 @@ main {
   }
 }
 .small-img {
-  width: 25%;        /* scales image to 25% of its container's width */
-  max-width: 120px;  /* caps the width at 120px so it doesn't get too big */
+  width: 80px;
   border-radius: 8px;
   margin-right: 1rem;
   float: left;
