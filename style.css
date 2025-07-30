@@ -164,12 +164,9 @@ main {
   }
 }
 .small-img {
-  width: 120px;
+  width: 25%;        /* scales image to 25% of its container's width */
+  max-width: 120px;  /* caps the width at 120px so it doesn't get too big */
   border-radius: 8px;
   margin-right: 1rem;
   float: left;
-}
-
-.ack-content {
-  overflow: auto; /* ensures layout doesn't break with floated image */
 }
