@@ -163,3 +163,13 @@ main {
     text-shadow: 0 0 10px #ff0000;
   }
 }
+.small-img {
+  width: 120px;
+  border-radius: 8px;
+  margin-right: 1rem;
+  float: left;
+}
+
+.ack-content {
+  overflow: auto; /* ensures layout doesn't break with floated image */
+}
