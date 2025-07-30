@@ -164,8 +164,8 @@ main {
   }
 }
 .small-img {
-  width: 80px;
-  border-radius: 8px;
+  width: 20px;
+  border-radius: 6px;
   margin-right: 1rem;
   float: left;
 }
